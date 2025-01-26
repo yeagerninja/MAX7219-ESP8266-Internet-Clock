@@ -12,9 +12,6 @@ from and inspired by the following sources:
     https://techlogics.net/esp8266-clock-with-max7219-matrix-display-date-time-display/
 
 To use code, update values in cofig box below for ssid, password, clock brightness, and utcOffset.
-
-Future updates to include physical switch for daylight savings, and formatting for single digit dates.
-Adjust brightness intensity.
 */
 
 #include "Arduino.h"
@@ -28,8 +25,9 @@ Adjust brightness intensity.
 const char *ssid     = "YOURNETWORK";
 const char *password = "YOURNETWORKPASSWORD";
 int bright = 4; // Adjust the brightness between 0 and 15
-float utcOffset = -4.0; // Time Zone setting during daylight savings
-//float utcOffset = -5.0; // Time Zone setting during standard time
+float DSTon = -4.0; // Time Zone setting during daylight savings (comment out if no DST)
+float DSToff = -5.0; // Time Zone setting during standard time (comment out if no DST)
+float utcOffset = -5.0; // Time Zone offset
 // =======================================================================
 
 WiFiClient client;
@@ -114,12 +112,12 @@ void setup() {
 
 void loop() {
 
-  // DST switch state loop
+  // DST switch state loop, comment out if no DST
   DSTswitchState = digitalRead(DSTswitchPin); // Read the switch state
   if (DSTswitchState == HIGH) {
-      utcOffset = -4.0; 
+      utcOffset = DSTon; 
     } else {
-      utcOffset = -5.0;; 
+      utcOffset = DSToff;; 
     }
 
   if(updCnt<=0) { // every 10 scrolls, ~450s=7.5m
