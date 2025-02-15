@@ -13,7 +13,7 @@ from and inspired by the following sources:
   Techlogics
     https://techlogics.net/esp8266-clock-with-max7219-matrix-display-date-time-display/
 
-To use code, update values in cofig box below for ssid, password, clock brightness, and utcOffset.
+To use code, update values in config box in the .ino code for ssid, password, clock brightness, and utcOffset.  Include DSTon/off variables if modeling switch for daylight savings time.
 
 ![IMG_2658](https://github.com/user-attachments/assets/f59b05b5-e6b6-4074-80f6-35f3df3878fa)
 ![IMG_3036](https://github.com/user-attachments/assets/1c838cc1-e2d0-4841-b009-9e6e214569cd)
